@@ -19,7 +19,7 @@ const renderCloud = function (ctx, x, y, color) {
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-var getMaxElement = function (arr) {
+const getMaxElement = function (arr) {
   var maxElement = arr[0];
 
   for (var i = 1; i < arr.length; i++) {
@@ -31,6 +31,29 @@ var getMaxElement = function (arr) {
   return maxElement;
 };
 
+const getDrawTitle = function (ctx, text, coordinates) {
+    ctx.fillStyle = '#000';
+    ctx.font = '16px PT Mono';
+    ctx.fillText('Ура вы победили!', CLOUD_X + GAP + FONT_GAP, BAR_WIDTH);
+    ctx.fillText('Список результатов: ', CLOUD_X + GAP + FONT_GAP, BAR_WIDTH + FONT_GAP);
+}
+
+
+
+const getDrawScore = function (ctx, score, coordinates) {
+   for (var i = 0; i < names.length; i++) {
+    ctx.fillStyle = '#000';
+    ctx.fillText(Math.round(times[i]), BAR_X + (BAR_GAP + BAR_WIDTH) * i, TIMES_Y);
+  }
+}
+
+const getDrawNames = function (crx,names, x, y) {
+  for (var i = 0; i < names.length; i++)
+    ctx.fillStyle = '#000';
+    ctx.fillText(names[i], BAR_X + (BAR_GAP + BAR_WIDTH) * i, FONT_Y);
+  }
+
+
 window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, CLOUD_X + GAP, FONT_GAP, 'rgba(0,0,0,0.3)');
   renderCloud(ctx, CLOUD_X, GAP, '#fff');
@@ -41,17 +64,22 @@ window.renderStatistics = function (ctx, names, times) {
     var randomColor = Math.random() * (max - min) + min;
     ctx.fillStyle = 'rgba(4,73, 130, ' + randomColor + ')';
   };
-
+/*
   for (var j = 0; j < names.length; j++) {
     ctx.fillStyle = '#000';
     ctx.fillText(names[j], BAR_X + (BAR_GAP + BAR_WIDTH) * j, FONT_Y);
     ctx.fillText(Math.round(times[j]), BAR_X + (BAR_GAP + BAR_WIDTH) * j, TIMES_Y);
-    ctx.font = '16px PT Mono';
-    ctx.fillText('Ура вы победили!', CLOUD_X + GAP + FONT_GAP, BAR_WIDTH);
-    ctx.fillText('Список результатов: ', CLOUD_X + GAP + FONT_GAP, BAR_WIDTH + FONT_GAP);
+
   }
+*/
+
+
 
   for (var i = 0; i < names.length; i++) {
+    getDrawTitle(ctx, 'Ура вы победили!', CLOUD_X + GAP + FONT_GAP, BAR_WIDTH);
+    getDrawTitle(ctx, 'Список результатов: ', CLOUD_X + GAP + FONT_GAP, BAR_WIDTH + FONT_GAP);
+    getDrawNames(crx, names[i], BAR_X + (BAR_GAP + BAR_WIDTH) * i, FONT_Y);
+
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
