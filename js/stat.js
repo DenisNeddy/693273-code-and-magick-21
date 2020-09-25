@@ -38,7 +38,7 @@ const getDrawTitle = function (ctx, text, coordinates) {
     ctx.fillText('Список результатов: ', CLOUD_X + GAP + FONT_GAP, BAR_WIDTH + FONT_GAP);
 }
 
-
+//Проверка совместимости!
 
 const getDrawScore = function (ctx, score, coordinates) {
    for (var i = 0; i < names.length; i++) {
